@@ -1,5 +1,6 @@
 defmodule SharedSettings.UI.Router do
   use Plug.Router
+  require EEx
 
   alias SharedSettings.UI.Parser
 
@@ -15,27 +16,15 @@ defmodule SharedSettings.UI.Router do
   plug :match
   plug :dispatch
 
+  def call(conn, opts) do
+    conn = extract_namespace(conn, opts)
+    super(conn, opts)
+  end
+
   get "/" do
-    send_resp(conn, 200,
-      "
-      <!DOCTYPE html>
-      <html lang=en>
-        <head>
-          <meta charset=utf-8>
-          <meta http-equiv=X-UA-Compatible content=\"IE=edge\">
-          <meta name=viewport content=\"width=device-width,initial-scale=1\">
-          <link rel=icon href=\"/public/favicon.ico\">
-          <title>shared-settings-ui</title>
-          <link href=\"/public/app.css\" rel=stylesheet>
-        </head>
-        <body>
-          <div id=app></div>
-          <script src=\"/public/chunks.js\"></script>
-          <script src=\"/public/app.js\"></script>
-        </body>
-      </html>
-      "
-    )
+    conn
+    |> put_resp_content_type("text/html")
+    |> send_resp(200, index_template(%{conn: conn}))
   end
 
   get "/api/settings" do
@@ -76,5 +65,17 @@ defmodule SharedSettings.UI.Router do
 
   match _ do
     send_resp(conn, 404, "oops")
+  end
+
+  EEx.function_from_file(:def, :index_template, Path.expand("./templates/index.html.eex", __DIR__), [:assigns])
+
+  def path(conn, path) do
+    Path.join(conn.assigns[:namespace], path)
+  end
+
+  defp extract_namespace(conn, opts) do
+    namespace = opts[:namespace] || ""
+
+    Plug.Conn.assign(conn, :namespace, "/#{namespace}")
   end
 end
