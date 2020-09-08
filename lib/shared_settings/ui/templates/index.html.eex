@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>shared-settings-ui</title>
-    <link href="<%= path(@conn, "/public/app.css") %>" rel=stylesheet>
+    <link href="<%= path(@conn, "/public/app.css?vsn=52aeb33c") %>" rel=stylesheet>
     <script>
       window.sharedSettingsApiBase = '<%= path(@conn, "") %>'
     </script>
   </head>
   <body>
     <div id=app></div>
-    <script src="<%= path(@conn, "/public/chunks.js") %>"></script>
-    <script src="<%= path(@conn, "/public/app.js") %>"></script>
+    <script src="<%= path(@conn, "/public/chunks.js?vsn=52aeb33c") %>"></script>
+    <script src="<%= path(@conn, "/public/app.js?vsn=52aeb33c") %>"></script>
   </body>
 </html>

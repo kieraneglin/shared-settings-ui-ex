@@ -7,7 +7,8 @@ defmodule SharedSettings.UI.Router do
   plug Plug.Logger, log: :debug
   plug Plug.Static,
     at: "/public",
-    from: :shared_settings_ui
+    from: :shared_settings_ui,
+    gzip: true
 
   plug Plug.Parsers, parsers: [:json],
     json_decoder: Jason
