@@ -6,7 +6,7 @@ defmodule SharedSettings.UI do
     check_cowboy()
 
     children = [
-      Plug.Adapters.Cowboy.child_spec(:http, FunWithFlags.UI.Router, [], [port: 8080])
+      Plug.Adapters.Cowboy.child_spec(:http, FunWithFlags.UI.Router, [], port: 8080)
     ]
 
     opts = [strategy: :one_for_one, name: FunWithFlags.UI.Supervisor]
@@ -14,7 +14,7 @@ defmodule SharedSettings.UI do
   end
 
   def run_standalone do
-    Plug.Adapters.Cowboy.http SharedSettings.UI.Router, [], port: 4005
+    Plug.Adapters.Cowboy.http(SharedSettings.UI.Router, [], port: 4005)
   end
 
   defp check_cowboy do

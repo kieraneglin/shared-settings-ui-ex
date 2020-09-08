@@ -4,17 +4,21 @@ defmodule SharedSettings.UI.Router do
 
   alias SharedSettings.UI.Parser
 
-  plug Plug.Logger, log: :debug
-  plug Plug.Static,
+  plug(Plug.Logger, log: :debug)
+
+  plug(Plug.Static,
     at: "/public",
     from: :shared_settings_ui,
     gzip: true
+  )
 
-  plug Plug.Parsers, parsers: [:json],
+  plug(Plug.Parsers,
+    parsers: [:json],
     json_decoder: Jason
+  )
 
-  plug :match
-  plug :dispatch
+  plug(:match)
+  plug(:dispatch)
 
   def call(conn, opts) do
     conn = extract_namespace(conn, opts)
@@ -67,7 +71,12 @@ defmodule SharedSettings.UI.Router do
     send_resp(conn, 404, "oops")
   end
 
-  EEx.function_from_file(:def, :index_template, Path.expand("./templates/index.html.eex", __DIR__), [:assigns])
+  EEx.function_from_file(
+    :def,
+    :index_template,
+    Path.expand("./templates/index.html.eex", __DIR__),
+    [:assigns]
+  )
 
   def path(conn, path) do
     Path.join(conn.assigns[:namespace], path)
