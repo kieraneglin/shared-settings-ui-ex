@@ -23,8 +23,6 @@ defmodule SharedSettingsUi.MixProject do
     [
       {:plug, "~> 1.10"},
       {:plug_cowboy, "~> 2.0", optional: true},
-      # TODO: remove
-      {:cors_plug, "~> 1.5"},
       {:jason, "~> 1.0", optional: true},
       {:redix, "~> 0.9", only: [:dev, :test]},
       {:shared_settings, path: "../shared_settings"}

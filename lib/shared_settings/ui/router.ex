@@ -4,7 +4,6 @@ defmodule SharedSettings.UI.Router do
 
   alias SharedSettings.UI.Parser
 
-  plug CORSPlug, origin: "*"
   plug Plug.Logger, log: :debug
   plug Plug.Static,
     at: "/public",
