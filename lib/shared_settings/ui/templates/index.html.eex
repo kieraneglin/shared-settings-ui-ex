@@ -7,7 +7,7 @@
     <title>shared-settings-ui</title>
     <link href="<%= path(@conn, "/public/app.css") %>" rel=stylesheet>
     <script>
-      window.sharedSettingsApiBase = '<%= path(@conn, "/") %>'
+      window.sharedSettingsApiBase = '<%= path(@conn, "") %>'
     </script>
   </head>
   <body>

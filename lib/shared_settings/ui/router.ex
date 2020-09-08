@@ -74,8 +74,10 @@ defmodule SharedSettings.UI.Router do
   end
 
   defp extract_namespace(conn, opts) do
-    namespace = opts[:namespace] || ""
-
-    Plug.Conn.assign(conn, :namespace, "/#{namespace}")
+    # Namespace should not end with a slash
+    case opts[:namespace] do
+      nil -> Plug.Conn.assign(conn, :namespace, "")
+      namespace -> Plug.Conn.assign(conn, :namespace, "/#{namespace}")
+    end
   end
 end
