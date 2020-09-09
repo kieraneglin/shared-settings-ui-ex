@@ -6,10 +6,10 @@ defmodule SharedSettings.UI do
     check_cowboy()
 
     children = [
-      Plug.Adapters.Cowboy.child_spec(:http, FunWithFlags.UI.Router, [], port: 8080)
+      Plug.Adapters.Cowboy.child_spec(:http, SharedSettings.UI.Router, [], port: 8080)
     ]
 
-    opts = [strategy: :one_for_one, name: FunWithFlags.UI.Supervisor]
+    opts = [strategy: :one_for_one, name: SharedSettings.UI.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -24,7 +24,7 @@ defmodule SharedSettings.UI do
       :ok
     else
       {:error, _} ->
-        raise "You need to add :cowboy to your Mix dependencies to run FunWithFlags.UI standalone."
+        raise "You need to add :cowboy to your Mix dependencies to run SharedSettings.UI standalone."
     end
   end
 
