@@ -42,7 +42,8 @@ defmodule SharedSettings.UI.Router do
   post "/api/settings" do
     setting_value = Parser.parse_value(conn.params["type"], conn.params["value"])
 
-    {:ok, _} = SharedSettings.put(conn.params["name"], setting_value)
+    {:ok, _} =
+      SharedSettings.put(conn.params["name"], setting_value, encrypt: !!conn.params["encrypted"])
 
     conn
     |> put_resp_content_type("application/json")
@@ -52,7 +53,7 @@ defmodule SharedSettings.UI.Router do
   put "/api/settings/:name" do
     setting_value = Parser.parse_value(conn.params["type"], conn.params["value"])
 
-    {:ok, _} = SharedSettings.put(name, setting_value)
+    {:ok, _} = SharedSettings.put(name, setting_value, encrypt: !!conn.params["encrypted"])
 
     conn
     |> put_resp_content_type("application/json")
