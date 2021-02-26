@@ -25,7 +25,8 @@ defmodule SharedSettingsUi.MixProject do
       {:plug_cowboy, "~> 2.0", optional: true},
       {:jason, "~> 1.0", optional: true},
       {:redix, "~> 0.9", only: [:dev, :test]},
-      {:shared_settings, git: "https://github.com/kieraneglin/shared-settings-ex.git"}
+      # TODO - change back to github link
+      {:shared_settings, path: "../shared_settings"}
     ]
   end
 end
