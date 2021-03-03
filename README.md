@@ -11,12 +11,10 @@ Acts as a wrapper for the base [SharedSettings UI][ss-ui-base].
 
 You are required to install and configure the base [Elixir SharedSettings][ss-ex] library first.
 
-SharedSettingsUI won't be available in Hex until all supporting libraries are completed. Until then, using git is recommended:
-
 ```elixir
 def deps do
   [
-    {:shared_settings_ui, git: "https://github.com/kieraneglin/shared-settings-ui-ex.git"}
+    {:shared_settings_ui, "~> 0.2.0"}
   ]
 end
 ```
