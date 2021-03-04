@@ -4,8 +4,8 @@ defmodule SharedSettingsUi.MixProject do
   def project do
     [
       app: :shared_settings_ui,
-      version: "0.2.0",
-      elixir: "~> 1.10",
+      version: "0.2.1",
+      elixir: "~> 1.8",
       description: description(),
       package: package(),
       start_permanent: Mix.env() == :prod,
